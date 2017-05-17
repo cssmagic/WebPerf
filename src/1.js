@@ -20,14 +20,14 @@ void function(){
 	At last we will fallback to the event listeners to capture the timing info.
 	We will also add window.pPerformance to provide Navigation Timing
 	compatible interface, and WebPerf.vendor attribute returns 'p' . Note, with
-	the fallback implementation, the navigation attributes may return NaN if 
+	the fallback implementation, the navigation attributes may return NaN if
 	the clock (rely on Date.now) is not monotonic.
 
 	*/
 	WebPerf.navigationTiming = tryNT2() || tryNT() || fallback()
 
 	// try Navigation Timing 2 API,
-	// see http://w3c-test.org/webperf/specs/NavigationTiming2/
+	// see https://www.w3.org/TR/navigation-timing-2/
 	function tryNT2() {
 		var perf = window.performance
 		if (perf && typeof perf.getEntriesByType === 'function') {
@@ -39,7 +39,7 @@ void function(){
 	}
 
 	// try Navigation Timing API,
-	// see http://w3c-test.org/webperf/specs/NavigationTiming/
+	// see https://www.w3.org/TR/navigation-timing/
 	function tryNT() {
 
 		var perf
@@ -95,6 +95,11 @@ void function(){
 						entry[k] = t[k] - t0
 					}
 				}
+				if ('chrome' in window && typeof window.chrome.loadTimes === 'function') {
+					var loadTimes = window.chrome.loadTimes()
+					entry['msFirstPaint'] = Math.round((loadTimes.firstPaintTime - loadTimes.startLoadTime) * 1000)
+				}
+
 				return entry
 			}
 		}
@@ -103,7 +108,7 @@ void function(){
 	function fallback() {
 
 		WebPerf.vendor = 'p'
-		
+
 		var dnow =	typeof Date.now === 'function' ?
 			Date.now : function () { return new Date().getTime() }
 
@@ -124,7 +129,7 @@ void function(){
 		var timing2 = {domLoading: 0}
 
 		//TODO: should we use setTimeout to capture *End time?
-		if (window.addEventListener) {
+		if (window.addEventListener && window.document.addEventListener) {
 
 			window.addEventListener('DOMContentLoaded', function(event){
 				var t = now(event.timeStamp)
@@ -177,7 +182,7 @@ void function(){
 
 			window.document.attachEvent('onreadystatechange', function(){
 				var t = now()
-				var s = this.readyState, attr = 'dom' + s.charAt(0).toUpperCase() + s.slice(1)
+				var s = window.document.readyState, attr = 'dom' + s.charAt(0).toUpperCase() + s.slice(1)
 				timing2[attr] = t[0]
 				timing[attr] = t[1]
 			})
