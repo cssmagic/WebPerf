@@ -1,0 +1,26 @@
+{
+  "name": "simple-web-perf",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cssmagic/simple-web-perf",
+  "repository": "cssmagic/simple-web-perf",
+  "author": "cssmagic <cssmagic.cn@gmail.com>",
+  "description": "Simple web performance reporter for mobile browsers.",
+  "main": "dist/main.min.js",
+  "keywords": [
+    "web",
+    "performance",
+    "navigation",
+    "timing"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dist": "gulp",
+    "test": "npm run dist && gzip-size ./dist/main.min.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulpfiles": "^0.3.0",
+    "gzip-size-cli": "*"
+  }
+}
