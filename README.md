@@ -1,61 +1,43 @@
-WebPerf
-=======
+# Simple Web Perf
 
-WebPerf provides a unified API for web performance
+> Simple web performance reporter for mobile browsers.
+> 
+> 一个精简的网页性能数据上报工具，为主流移动浏览器优化。
 
+<!-- -->
 
-Usage
------
+> Inspired by [hax/WebPerf](https://github.com/hax/WebPerf):
+> 
+> > WebPerf provides a unified API for web performance
 
-Insert 0/1/2.js to proper position of the document. For example, if you use PHP:
+## 兼容性
 
-```html
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
+* 支持以下移动平台的主流浏览器：
+	* iOS 9+
+	* Android 4+
+* 同样支持以下桌面浏览器：
+	* Firefox (Latest 2 versions)
+	* Chrome (Latest 2 versions)
+	* Safari (Latest 2 versions)
 
-<script><?php include 'WebPerf/dist/0.min.js' ?></script>
+## 安装
 
-<title> ... </title>
-<!-- stylesheets and other scripts -->
-
-<script><?php include 'WebPerf/dist/1.min.js' ?></script>
-
-</head>
-<body>
-... page content
-
-<script><?php include 'WebPerf/dist/2.min.js' ?></script>
-<script>
-WebPerf.setLogger(function(){
-	console.log(this.navigationTiming())
-})
-</script>
-
-</body>
-</html>
+```sh
+npm i simple-web-perf
 ```
 
-If you want to send data to server, you could use WebPerf.nt() method which returns a compact object to minimize the length of the request url.
+## 使用方法
 
-```html
-<script>
-WebPerf.setLogger(function(){
-	// use Google Analytics
-	_gaq.push(['_setCustomVar', 1, 'nt', JSON.stringify(this.nt())])
-	_gaq.push(['_trackPageview'])
-})
-</script>
-```
+（待完成）
 
-API
----
+## API
 
-### WebPerf.navigationTiming() ###
-### WebPerf.nt() ###
-### WebPerf.setLogger(Function) ###
+* `WebPerf.navigationTiming()`
+* `WebPerf.nt()`
+* `WebPerf.setLogger(Function)`
 
-### WebPerf.t0 ###
-### WebPerf.vendor ###
-### window.pPerformance ###
+***
+
+## License
+
+[MIT License](http://www.opensource.org/licenses/mit-license.php)
