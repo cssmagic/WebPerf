@@ -1,1 +1,0 @@
-var WebPerf = { t0: new Date().getTime() }
