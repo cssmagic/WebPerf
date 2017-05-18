@@ -33,8 +33,16 @@ npm i simple-web-perf
 ## API
 
 * `WebPerf.navigationTiming()`
+
+	返回网页性能相关的数据，其格式近似符合 Navigation Timing Level 2 的定义（但未包含浏览器无法获取的字段和性能统计不需要的字段）。
+
 * `WebPerf.nt()`
+
+	返回网页性能相关的数据，各字段名均已缩短，便于上报。
+
 * `WebPerf.setLogger(Function)`
+
+	指定上报方式。
 
 ***
 
