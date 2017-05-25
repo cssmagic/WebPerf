@@ -45,7 +45,7 @@ void function () {
 			// get first paint timestamp from Chrome's private API
 			if ('chrome' in window && typeof window.chrome.loadTimes === 'function') {
 				var loadTimes = window.chrome.loadTimes()
-				entry.msFirstPaint = Math.round(loadTimes.firstPaintTime * 1000)
+				timing.msFirstPaint = Math.round(loadTimes.firstPaintTime * 1000)
 			}
 			// transform data to match Navigation Timing Level 2
 			for (var k in timing) {
